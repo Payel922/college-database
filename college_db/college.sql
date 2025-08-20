@@ -49,3 +49,81 @@ add column city varchar(30) default  "gurgaon";
 -- delete the city column for teacher table;
 alter table teacher
 drop column city;
+
+
+-- new database for student 
+
+create database student ;
+
+
+-- using student database
+
+use  student;
+
+-- create a table for student database
+create table student(
+rollno int primary key, 
+name varchar(30),
+city Varchar(30),
+marks int
+
+);
+-- insert data to student table
+
+insert into student
+(rollno,name,city,marks)
+values
+(110,"adam","delhi",76),
+(108,"bob" , "Mumbai ",65),
+(124,"casey","pune",94),
+(112,"duke","pune",80);
+
+-- show all content on student table
+
+select * from student;
+
+-- find all student who scored 75+
+select * from student 
+where marks>75;
+
+-- find names of all cities and name  but not the two same city at a time;
+select distinct city,name
+from student;
+
+--  another way is grouping
+select city
+from student 
+group by city
+
+-- find the maximum marks of students from each city
+select city , max(marks)
+from student 
+group by city;
+
+-- find the avg marks of the class
+select avg(marks)
+from student;
+
+-- add a new column ,assign a grade such that 
+-- marks>80 grade = 0;
+-- marks 70-80 grade = A;
+-- marks 60-70 grade = B:
+
+alter table student 
+add column grade varchar (2) ;
+
+update student 
+set grade = "0"
+Where marks>=80;
+
+update student 
+set grade = "A"
+Where marks>70 and marks<80;
+
+
+update student 
+set grade = "B"
+Where marks>60 and marks<70;
+
+
+
